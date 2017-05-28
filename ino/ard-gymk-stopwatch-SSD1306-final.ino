@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.4.0"
+#define version "1.4.4"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -12,7 +12,8 @@
 #include <eRCaGuy_Timer2_Counter.h>
 #include <SimpleList.h>
 
-#define DEBUG1
+#define DEBUGoff
+#define WYPELNIJoff
 
 #define I2C_ADDRESS 0x3C // adres I2C 
 
@@ -20,7 +21,7 @@
 #define pin_ex_reset 3		// wejście przycisku reset nożnego
 #define pin_reset 10		// wejście przycisku reset na urządzeniu
 #define pin_menu  11		// wejście przycisku menu na urządzeniu
-#define int_max_times_nr 2 //###7
+#define int_max_times_nr 7
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
@@ -32,6 +33,7 @@ char buf_best_czas[10] = "00:00:000";
 char bufms[4] = "000";
 char bufsek[3] = "00";
 char bufmin[3] = "00";
+char buftemp[3] = "00";
 
 SimpleList<long> lista_czasow;
 
@@ -88,10 +90,17 @@ void setup()
 
 	attachInterrupt(digitalPinToInterrupt(pin_sensor), fsensor, FALLING);
 
+	#ifdef WYPELNIJ
+	// wypełnienie tablicy archiwalnej pomiarami	
+	for (int i=1; i<=int_max_times_nr; i++) {
+		sprintf(buftemp, "%d)",i);
+		lista_czasow.push_front(buftemp);
+	}
+	#endif
+
 	#ifdef DEBUG
 	Serial.begin(9600);
 	#endif
-
 }
 
 void loop()
@@ -154,6 +163,7 @@ void loop()
 		czas_aktualny = (czas_konca - czas_startu);
 		lista_czasow.push_front(czas_aktualny);
 		dopisano = HIGH;
+		while(lista_czasow.size() > int_max_times_nr) lista_czasow.pop_back();
 	}
 
 	wyswietlEkran(ekran);
@@ -208,7 +218,7 @@ void pokazArchiwalneCzasy()
 {
 	oled.setFont(Stang5x7);
 	oled.home();
-	oled.print("ARCHIWALNE");
+	oled.print(" ==== ARCHIWALNE ==== ");
 	int x = 25;
 	int y = 1;
 
@@ -225,12 +235,14 @@ void pokazArchiwalneCzasy()
 
 void pokazPaging()
 {
+	if (ekran != 0){
 	char bufor[4] = "0/0";
 	sprintf(bufor, "%u/%u",ekran, max_ekran);
 
 	oled.setFont(Stang5x7);
 	oled.setCursor(110, 7);
 	oled.print(bufor); 
+	}
 }
 
 void wyswietlEkran(int screen)
@@ -264,11 +276,6 @@ void readInputs()
 	if (pin_menu_deb.fell() == HIGH) {state_menu = HIGH;}
 	if (pin_reset_deb.fell() == HIGH) {state_reset = HIGH;}
 	if (pin_ex_reset_deb.fell() == HIGH) {state_ex_reset = HIGH;}
-/*
-	state_reset = digitalRead(pin_reset);
-	state_ex_reset = digitalRead(pin_ex_reset);
-	state_menu = digitalRead(pin_menu);
-*/
 }
 
 void fsensor()
