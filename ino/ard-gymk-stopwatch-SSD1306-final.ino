@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.4.4"
+#define version "1.4.5"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -13,7 +13,7 @@
 #include <SimpleList.h>
 
 #define DEBUGoff
-#define WYPELNIJoff
+#define WYPELNIJ
 
 #define I2C_ADDRESS 0x3C // adres I2C 
 
@@ -21,7 +21,12 @@
 #define pin_ex_reset 3		// wejście przycisku reset nożnego
 #define pin_reset 10		// wejście przycisku reset na urządzeniu
 #define pin_menu  11		// wejście przycisku menu na urządzeniu
-#define int_max_times_nr 7
+#define int_max_times_nr 6
+
+#define pout_ready_led 9	// dioda led sygnalizująca o gotowości do pomiaru
+#define pout_running_led 8	// dioda led sygnalizująca o trwaniu pomiaru
+#define pout_buzzer	7		// buzzer informujący o przecięciu wiązki
+#define buzzer_time 1000 	// czas piszczenia w [ms]
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
@@ -55,6 +60,12 @@ unsigned long czas_konca;
 volatile unsigned long mils;
 unsigned long czas_aktualny;
 
+boolean buzzer_on = false; // załączenie buzzera
+volatile boolean buzzer_switch_on = false;
+unsigned long previousMillis;
+unsigned long currentMillis;
+
+
 Bounce pin_reset_deb = Bounce(); 
 Bounce pin_ex_reset_deb = Bounce(); 
 Bounce pin_menu_deb = Bounce(); 
@@ -77,6 +88,15 @@ void setup()
 	pinMode(pin_menu, INPUT_PULLUP); // przycisk menu
 	pin_menu_deb.attach(pin_menu);
 	pin_menu_deb.interval(debounce_time_ms);
+
+	pinMode(pout_ready_led, OUTPUT);	// dioda zielona led
+	digitalWrite(pout_ready_led, HIGH);
+
+	pinMode(pout_running_led, OUTPUT);	// dioda czerwona led
+	digitalWrite(pout_running_led, HIGH);
+
+	pinMode(pout_buzzer, OUTPUT);		// buzzer
+	digitalWrite(pout_buzzer, HIGH);
 
 	oled.begin(&Adafruit128x64, I2C_ADDRESS);
 
@@ -118,8 +138,8 @@ void loop()
 
 	// wciśnięto przycisk RESETU
 	if ((state_reset) || (state_ex_reset))
-	{
-		ekran=1;
+	{		
+		if (state_ex_reset) ekran=1;
 		working = false;
 		finish = false;
 		best = false;
@@ -134,12 +154,19 @@ void loop()
 		oled.clear();
 	}
 
+	// konieczność uruchomienia buzzera
+	if (buzzer_switch_on == HIGH) {
+		buzzer_switch_on = LOW;
+		buzzer_on = HIGH;
+		previousMillis = millis();
+	}
+
 	// rozpoczęto pomiar
 	if ((state_sensor == HIGH) && (working == LOW) && (finish == LOW))
 	{
 		czas_startu = mils;
 		working = HIGH;
-		state_sensor = LOW;
+		state_sensor = LOW;		
 	}
 
 	// podczas pomiaru
@@ -167,6 +194,7 @@ void loop()
 	}
 
 	wyswietlEkran(ekran);
+	setOutputs();
 }
 
 void czasNaString(unsigned long czas)
@@ -201,9 +229,9 @@ void pokazAktualnyCzas()
 
 	oled.setFont(Stang5x7);
 	oled.setCursor(0, 0);
-	if ((working == LOW) && (finish == LOW)) oled.print("READY  ");  
-	if ((working == HIGH) && (finish == LOW)) oled.print("RUNNING"); 
-	if ((working == LOW) && (finish == HIGH)) oled.print("FINISH ");   
+	if ((working == LOW) && (finish == LOW)) oled.print( "GOTOWY ");  
+	if ((working == HIGH) && (finish == LOW)) oled.print("POMIAR "); 
+	if ((working == LOW) && (finish == HIGH)) oled.print("META   ");   
 
 	if (best == HIGH) 
 	{
@@ -218,17 +246,26 @@ void pokazArchiwalneCzasy()
 {
 	oled.setFont(Stang5x7);
 	oled.home();
-	oled.print(" ==== ARCHIWALNE ==== ");
+
+	if ((working == LOW) && (finish == LOW)) oled.print( "GOTOWY ");  
+	if ((working == HIGH) && (finish == LOW)) oled.print("POMIAR "); 
+	if ((working == LOW) && (finish == HIGH)) oled.print("META   "); 
+
+	oled.setCursor(43, 0);
+	czasNaString(czas_aktualny);
+	oled.print(buf_akt_czas);
+
 	int x = 25;
-	int y = 1;
+	int y = 2;
 
 	for (SimpleList<long>::iterator itr = lista_czasow.begin(); itr != lista_czasow.end(); ++itr)
 	{
 		oled.setCursor(x, y);
-		oled.print(y);
+		oled.print(y-1);
 		oled.print(") ");
 		czasNaString(*itr);
 		oled.print(buf_akt_czas);
+		if ((y==2) && (working == LOW) && (finish == HIGH)) oled.print(" <--");
 		y++;
 	}
 }
@@ -278,13 +315,30 @@ void readInputs()
 	if (pin_ex_reset_deb.fell() == HIGH) {state_ex_reset = HIGH;}
 }
 
+void setOutputs()
+{
+	if ((working == LOW) && (finish == LOW)) digitalWrite(pout_ready_led, LOW); else digitalWrite(pout_ready_led, HIGH);
+	if ((working == HIGH) && (finish == LOW)) digitalWrite(pout_running_led, LOW); else digitalWrite(pout_running_led, HIGH);
+	if (buzzer_on) digitalWrite(pout_buzzer, LOW); else digitalWrite(pout_buzzer, HIGH);
+
+	if (buzzer_on) 
+	{
+		currentMillis = millis();
+		if (currentMillis - previousMillis > buzzer_time) {
+			buzzer_on = LOW;
+		}
+	}
+}
+
 void fsensor()
 {
 	// uruchomienie pomiaru
 	if ((working == LOW) || ((finish == LOW) && (czas_aktualny >= czas_nieczulosci_ms)))
 	{
 		mils = timer2.get_count();
-		state_sensor = HIGH;
+		state_sensor = HIGH;	
 	}
 	else state_sensor = LOW;
+
+	buzzer_switch_on = true;
 }
