@@ -13,7 +13,7 @@
 #include <SimpleList.h>
 
 #define DEBUGoff
-#define WYPELNIJ
+#define WYPELNIJoff
 
 #define I2C_ADDRESS 0x3C // adres I2C 
 
@@ -233,6 +233,8 @@ void pokazAktualnyCzas()
 	if ((working == HIGH) && (finish == LOW)) oled.print("POMIAR "); 
 	if ((working == LOW) && (finish == HIGH)) oled.print("META   ");   
 
+
+	/*
 	if (best == HIGH) 
 	{
 		oled.setFont(Stang5x7);
@@ -240,6 +242,7 @@ void pokazAktualnyCzas()
 		oled.print("best: "); 
 		oled.print(buf_best_czas);		
 	}
+	*/
 }
 
 void pokazArchiwalneCzasy()
