@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.4.5"
+#define version "1.5.0"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
