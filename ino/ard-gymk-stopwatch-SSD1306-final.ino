@@ -33,6 +33,9 @@
 #define logo_time 100 // czas wyswietlania logo w ms
 #define czas_nieczulosci_ms 1*1000000 // czas przed upływem którego nie da się zresetować pomiaru
 
+#define pin_sensor_gp8 4 // pin czujnika licznika okrążeń w gp8
+#define pin_gp8_mode 5 // przełącznik trybu GP8
+
 char buf_akt_czas[10] = "00:00:000";
 char buf_best_czas[10] = "00:00:000";
 char bufms[4] = "000";
@@ -65,10 +68,16 @@ volatile boolean buzzer_switch_on = false;
 unsigned long previousMillis;
 unsigned long currentMillis;
 
+boolean gp8_mode = false; 
+int okrazenie = 0; // licznik okrazen
+boolean gp8_sensor_active = false; // zawodnik przeciął laser
+boolean last_state = false;
+#define czas_nieczulosci_gp8_ms 2000 
 
 Bounce pin_reset_deb = Bounce(); 
 Bounce pin_ex_reset_deb = Bounce(); 
 Bounce pin_menu_deb = Bounce(); 
+Bounce pin_gp8_mode_deb = Bounce();
 
 void setup()
 {
@@ -76,6 +85,11 @@ void setup()
 
 	// Ustawienie wejść, wyjść
 	pinMode(pin_sensor, INPUT); // czujnik laserowy
+
+	pinMode(pin_sensor_gp8, INPUT); // czujnik laserowy ilości okrążeń GP8
+	pinMode(pin_gp8_mode, INPUT_PULLUP); // przełącznik trybu
+	pin_gp8_mode_deb.attach(pin_gp8_mode);
+	pin_gp8_mode_deb.interval(debounce_time_ms);
 	
 	pinMode(pin_reset, INPUT_PULLUP); // przycisk reset
 	pin_reset_deb.attach(pin_reset);
@@ -146,12 +160,19 @@ void loop()
 		czas_startu = 0;
 		czas_konca = 0;
 		czas_aktualny = 0;
+		okrazenie = 0;
 		state_sensor = LOW;
+		gp8_sensor_active = LOW;
 		state_menu = LOW;
 		state_reset = LOW;
 		state_ex_reset = LOW;	
 		dopisano = LOW;	
 		oled.clear();
+	}
+
+	// przecięto wiązkę zliczającą gp8
+	if (gp8_sensor_active) {
+		
 	}
 
 	// konieczność uruchomienia buzzera
@@ -233,6 +254,21 @@ void pokazAktualnyCzas()
 	if ((working == HIGH) && (finish == LOW)) oled.print("POMIAR "); 
 	if ((working == LOW) && (finish == HIGH)) oled.print("META   ");   
 
+	if (gp8_mode) {
+		oled.setCursor(110, 0);
+		oled.print("GP8");
+
+		oled.setFont(Stang5x7);
+		oled.setCursor(0, 7);
+		oled.print("Okrazenie: ");
+		oled.print(okrazenie);
+		oled.print("/5");
+	} else {
+		oled.setCursor(110, 0);
+		oled.print("   ");	
+		oled.setCursor(0, 7);
+		oled.print("              ");
+	}
 
 	/*
 	if (best == HIGH) 
@@ -312,10 +348,14 @@ void readInputs()
 	pin_menu_deb.update();
 	pin_reset_deb.update();
 	pin_ex_reset_deb.update();
+	pin_gp8_mode_deb.update();
 
 	if (pin_menu_deb.fell() == HIGH) {state_menu = HIGH;}
 	if (pin_reset_deb.fell() == HIGH) {state_reset = HIGH;}
 	if (pin_ex_reset_deb.fell() == HIGH) {state_ex_reset = HIGH;}
+	if (pin_gp8_mode_deb.read() == LOW) gp8_mode = HIGH; else gp8_mode = LOW;
+
+	if ((digitalRead(pin_sensor_gp8)) && (gp8_sensor_active == LOW)) gp8_sensor_active = true;
 }
 
 void setOutputs()
