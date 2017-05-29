@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.5.10"
+#define version "1.5.11"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -12,7 +12,7 @@
 #include <eRCaGuy_Timer2_Counter.h>
 #include <SimpleList.h>
 
-#define DEBUG 1
+#define DEBUGoff
 #define WYPELNIJoff
 
 #define I2C_ADDRESS 0x3C // adres I2C 
@@ -36,7 +36,7 @@
 #define pin_sensor_gp8 3 // pin czujnika licznika okrążeń w gp8
 #define pin_gp8_mode 5 // przełącznik trybu GP8
 
-int buzzer_time = 0;
+int buzzer_time = czas_piszczenia_ms;
 
 char buf_akt_czas[10] = "00:00:000";
 char buf_best_czas[10] = "00:00:000";
@@ -191,17 +191,26 @@ void loop()
 	// jeśli liczba okrążeń jest 5, piśnij
 	if ((okrazenie == 5) && (gp8_buzzer == LOW)) {
 		gp8_buzzer = HIGH;
-		buzzer_switch_on == HIGH;
+		buzzer_switch_on = HIGH;
 		buzzer_time = czas_piszczenia_GP8_ms;
 	}
 
-	if (buzzer_on == HIGH) Serial.println("buzzer_on HIGH"); else  Serial.println("buzzer_on LOW");
-
 	// konieczność uruchomienia buzzera
-	if ((buzzer_switch_on == HIGH) && (buzzer_on == LOW)) {
+	if ((buzzer_switch_on == HIGH) && (buzzer_on == LOW)) { 
 		buzzer_switch_on = LOW;
 		buzzer_on = HIGH;
 		previousMillisBuzzer = millis();
+	}
+
+	// Po załączeniu buzzera po osiągnięciu 5, powracamy z czasem pisku do zwykłego piszczenia
+	if ((gp8_buzzer == HIGH) && (state_sensor == LOW) && (working == HIGH) && (finish == LOW) && (buzzer_on == LOW)) {
+		buzzer_time = czas_piszczenia_ms;
+	}
+
+	// Jeśli podczas piszczenia po osiągnięciu 5, zakończymy pomiar, nalezy przerwać odliczanie
+	if ((gp8_buzzer == HIGH) && (state_sensor == HIGH) && (working == HIGH) && (finish == LOW)) {
+		buzzer_on = LOW;
+		buzzer_time = czas_piszczenia_ms;
 	}
 
 	// rozpoczęto pomiar
@@ -399,11 +408,6 @@ void setOutputs()
 			gp8_sensor_active = LOW;
 			gp8_dopisano = LOW;
 		}
-
-		//DIAG
-		#ifdef DEBUG
-		Serial.println(currentMillisGP8 - previousMillisGP8);	
-		#endif
 	}
 }
 
