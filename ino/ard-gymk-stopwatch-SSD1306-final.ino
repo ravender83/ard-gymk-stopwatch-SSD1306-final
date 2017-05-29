@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.5.0"
+#define version "1.5.9"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -78,6 +78,7 @@ Bounce pin_reset_deb = Bounce();
 Bounce pin_ex_reset_deb = Bounce(); 
 Bounce pin_menu_deb = Bounce(); 
 Bounce pin_gp8_mode_deb = Bounce();
+Bounce pin_sensor_gp8_deb = Bounce();
 
 void setup()
 {
@@ -172,7 +173,8 @@ void loop()
 
 	// przecięto wiązkę zliczającą gp8
 	if (gp8_sensor_active) {
-		
+		okrazenie++;
+		gp8_sensor_active = LOW;
 	}
 
 	// konieczność uruchomienia buzzera
@@ -355,7 +357,7 @@ void readInputs()
 	if (pin_ex_reset_deb.fell() == HIGH) {state_ex_reset = HIGH;}
 	if (pin_gp8_mode_deb.read() == LOW) gp8_mode = HIGH; else gp8_mode = LOW;
 
-	if ((digitalRead(pin_sensor_gp8)) && (gp8_sensor_active == LOW)) gp8_sensor_active = true;
+	if ((pin_sensor_gp8_deb.fell() == HIGH) && (gp8_sensor_active == LOW)) gp8_sensor_active = HIGH;
 }
 
 void setOutputs()

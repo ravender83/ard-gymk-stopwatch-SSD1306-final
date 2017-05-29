@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
- <FRAME activewindow="1">
-  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffffab0000000d000000d506000003040000</PLACEMENT>
+ <FRAME activewindow="0">
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffffab0000000d000000d506000003040000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
-  <WINDOW type="default" module="VSMDEBUG"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
@@ -104,6 +103,12 @@
      <ITEM name="ShowChanges">Yes</ITEM>
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000020</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="450" x="38" flags="00000022" y="129" h="250" pid="0" iid="6">
+    <PROPERTIES>
+     <ITEM name="AutoEcho">0</ITEM>
+     <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>
