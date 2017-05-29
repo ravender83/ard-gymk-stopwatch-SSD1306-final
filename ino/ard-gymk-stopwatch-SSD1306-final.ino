@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.5.9"
+#define version "1.5.10"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -12,13 +12,13 @@
 #include <eRCaGuy_Timer2_Counter.h>
 #include <SimpleList.h>
 
-#define DEBUGoff
+#define DEBUG 1
 #define WYPELNIJoff
 
 #define I2C_ADDRESS 0x3C // adres I2C 
 
 #define pin_sensor 2		// wejście czujnika laserowego
-#define pin_ex_reset 3		// wejście przycisku reset nożnego
+#define pin_ex_reset 4		// wejście przycisku reset nożnego
 #define pin_reset 10		// wejście przycisku reset na urządzeniu
 #define pin_menu  11		// wejście przycisku menu na urządzeniu
 #define int_max_times_nr 6
@@ -26,15 +26,17 @@
 #define pout_ready_led 9	// dioda led sygnalizująca o gotowości do pomiaru
 #define pout_running_led 8	// dioda led sygnalizująca o trwaniu pomiaru
 #define pout_buzzer	7		// buzzer informujący o przecięciu wiązki
-#define buzzer_time 1000 	// czas piszczenia w [ms]
+#define czas_piszczenia_ms 1000 	// czas piszczenia w [ms]
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
 #define logo_time 100 // czas wyswietlania logo w ms
 #define czas_nieczulosci_ms 1*1000000 // czas przed upływem którego nie da się zresetować pomiaru
 
-#define pin_sensor_gp8 4 // pin czujnika licznika okrążeń w gp8
+#define pin_sensor_gp8 3 // pin czujnika licznika okrążeń w gp8
 #define pin_gp8_mode 5 // przełącznik trybu GP8
+
+int buzzer_time = 0;
 
 char buf_akt_czas[10] = "00:00:000";
 char buf_best_czas[10] = "00:00:000";
@@ -65,20 +67,24 @@ unsigned long czas_aktualny;
 
 boolean buzzer_on = false; // załączenie buzzera
 volatile boolean buzzer_switch_on = false;
-unsigned long previousMillis;
-unsigned long currentMillis;
+unsigned long previousMillisBuzzer;
+unsigned long currentMillisBuzzer;
 
 boolean gp8_mode = false; 
-int okrazenie = 0; // licznik okrazen
-boolean gp8_sensor_active = false; // zawodnik przeciął laser
+int okrazenie = 4; // licznik okrazen 0
+volatile boolean gp8_sensor_active = false; // zawodnik przeciął laser
+boolean gp8_dopisano = false;
 boolean last_state = false;
 #define czas_nieczulosci_gp8_ms 2000 
+#define czas_piszczenia_GP8_ms 2000
+boolean gp8_buzzer = false;
+unsigned long previousMillisGP8;
+unsigned long currentMillisGP8;
 
 Bounce pin_reset_deb = Bounce(); 
 Bounce pin_ex_reset_deb = Bounce(); 
 Bounce pin_menu_deb = Bounce(); 
 Bounce pin_gp8_mode_deb = Bounce();
-Bounce pin_sensor_gp8_deb = Bounce();
 
 void setup()
 {
@@ -86,8 +92,8 @@ void setup()
 
 	// Ustawienie wejść, wyjść
 	pinMode(pin_sensor, INPUT); // czujnik laserowy
-
 	pinMode(pin_sensor_gp8, INPUT); // czujnik laserowy ilości okrążeń GP8
+
 	pinMode(pin_gp8_mode, INPUT_PULLUP); // przełącznik trybu
 	pin_gp8_mode_deb.attach(pin_gp8_mode);
 	pin_gp8_mode_deb.interval(debounce_time_ms);
@@ -124,6 +130,7 @@ void setup()
 	lista_czasow.clear();
 
 	attachInterrupt(digitalPinToInterrupt(pin_sensor), fsensor, FALLING);
+	attachInterrupt(digitalPinToInterrupt(pin_sensor_gp8), fgp8sensor, FALLING);
 
 	#ifdef WYPELNIJ
 	// wypełnienie tablicy archiwalnej pomiarami	
@@ -164,24 +171,37 @@ void loop()
 		okrazenie = 0;
 		state_sensor = LOW;
 		gp8_sensor_active = LOW;
+		gp8_dopisano = LOW;
+		gp8_buzzer = LOW;
 		state_menu = LOW;
 		state_reset = LOW;
 		state_ex_reset = LOW;	
 		dopisano = LOW;	
+		buzzer_time = czas_piszczenia_ms;
 		oled.clear();
 	}
 
 	// przecięto wiązkę zliczającą gp8
-	if (gp8_sensor_active) {
+	if ((gp8_sensor_active == HIGH) && (gp8_dopisano == LOW)) {
 		okrazenie++;
-		gp8_sensor_active = LOW;
+		gp8_dopisano = HIGH;
+		previousMillisGP8 = millis();	
 	}
 
+	// jeśli liczba okrążeń jest 5, piśnij
+	if ((okrazenie == 5) && (gp8_buzzer == LOW)) {
+		gp8_buzzer = HIGH;
+		buzzer_switch_on == HIGH;
+		buzzer_time = czas_piszczenia_GP8_ms;
+	}
+
+	if (buzzer_on == HIGH) Serial.println("buzzer_on HIGH"); else  Serial.println("buzzer_on LOW");
+
 	// konieczność uruchomienia buzzera
-	if (buzzer_switch_on == HIGH) {
+	if ((buzzer_switch_on == HIGH) && (buzzer_on == LOW)) {
 		buzzer_switch_on = LOW;
 		buzzer_on = HIGH;
-		previousMillis = millis();
+		previousMillisBuzzer = millis();
 	}
 
 	// rozpoczęto pomiar
@@ -355,9 +375,7 @@ void readInputs()
 	if (pin_menu_deb.fell() == HIGH) {state_menu = HIGH;}
 	if (pin_reset_deb.fell() == HIGH) {state_reset = HIGH;}
 	if (pin_ex_reset_deb.fell() == HIGH) {state_ex_reset = HIGH;}
-	if (pin_gp8_mode_deb.read() == LOW) gp8_mode = HIGH; else gp8_mode = LOW;
-
-	if ((pin_sensor_gp8_deb.fell() == HIGH) && (gp8_sensor_active == LOW)) gp8_sensor_active = HIGH;
+	if (pin_gp8_mode_deb.read() == LOW) gp8_mode = HIGH; else gp8_mode = LOW;	
 }
 
 void setOutputs()
@@ -368,10 +386,24 @@ void setOutputs()
 
 	if (buzzer_on) 
 	{
-		currentMillis = millis();
-		if (currentMillis - previousMillis > buzzer_time) {
+		currentMillisBuzzer = millis();
+		if (currentMillisBuzzer - previousMillisBuzzer > buzzer_time) {
 			buzzer_on = LOW;
 		}
+	}
+
+	if ((gp8_sensor_active == HIGH) && (gp8_dopisano == HIGH))
+	{
+		currentMillisGP8 = millis();
+		if (currentMillisGP8 - previousMillisGP8 > czas_nieczulosci_gp8_ms) {
+			gp8_sensor_active = LOW;
+			gp8_dopisano = LOW;
+		}
+
+		//DIAG
+		#ifdef DEBUG
+		Serial.println(currentMillisGP8 - previousMillisGP8);	
+		#endif
 	}
 }
 
@@ -381,9 +413,15 @@ void fsensor()
 	if ((working == LOW) || ((finish == LOW) && (czas_aktualny >= czas_nieczulosci_ms)))
 	{
 		mils = timer2.get_count();
-		state_sensor = HIGH;	
+		state_sensor = HIGH;
+
 	}
 	else state_sensor = LOW;
+	
+	buzzer_switch_on = HIGH;
+}
 
-	buzzer_switch_on = true;
+void fgp8sensor()
+{
+	if ((state_sensor == LOW) && (working == HIGH) && (finish == LOW) && (gp8_sensor_active == LOW)) gp8_sensor_active = HIGH;
 }
