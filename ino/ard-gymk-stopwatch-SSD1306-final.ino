@@ -30,8 +30,8 @@
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
-#define logo_time 100 // czas wyswietlania logo w ms
-#define czas_nieczulosci_ms 1*1000000 // czas przed upływem którego nie da się zresetować pomiaru
+#define logo_time 2000 // czas wyswietlania logo w ms
+#define czas_nieczulosci_ms 5*1000000 // czas przed upływem którego nie da się zresetować pomiaru
 
 #define pin_sensor_gp8 3 // pin czujnika licznika okrążeń w gp8
 #define pin_gp8_mode 5 // przełącznik trybu GP8
@@ -71,7 +71,7 @@ unsigned long previousMillisBuzzer;
 unsigned long currentMillisBuzzer;
 
 boolean gp8_mode = false; 
-int okrazenie = 4; // licznik okrazen 0
+int okrazenie = 0; // licznik okrazen 0
 volatile boolean gp8_sensor_active = false; // zawodnik przeciął laser
 boolean gp8_dopisano = false;
 boolean last_state = false;
