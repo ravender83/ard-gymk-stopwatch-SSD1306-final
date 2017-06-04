@@ -3,8 +3,10 @@
  * Autor:    Piotr Ślęzak
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
+ * 1.4 - działający pomiar
+ * 1.5 - uruchomiony tryb GP8
 */
-#define version "1.5.11"
+#define version "1.6.13"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -30,8 +32,8 @@
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
-#define logo_time 2000 // czas wyswietlania logo w ms
-#define czas_nieczulosci_ms 5*1000000 // czas przed upływem którego nie da się zresetować pomiaru
+#define logo_time 10 // czas wyswietlania logo w ms
+#define czas_nieczulosci_ms 1*1000000 // czas przed upływem którego nie da się zresetować pomiaru
 
 #define pin_sensor_gp8 3 // pin czujnika licznika okrążeń w gp8
 #define pin_gp8_mode 5 // przełącznik trybu GP8
@@ -276,6 +278,7 @@ void pokazAktualnyCzas()
 	oled.home();
 	oled.setFont(lcdnums14x24); 
 	oled.setCursor(0, 2);
+	
 	czasNaString(czas_aktualny);
 	oled.print(buf_akt_czas);
 
@@ -292,13 +295,19 @@ void pokazAktualnyCzas()
 		oled.setFont(Stang5x7);
 		oled.setCursor(0, 7);
 		oled.print("Okrazenie: ");
+		oled.setFont(fixednums8x16);
+		oled.setCursor(62, 6);
 		oled.print(okrazenie);
 		oled.print("/5");
+		oled.setFont(Stang5x7);
 	} else {
 		oled.setCursor(110, 0);
 		oled.print("   ");	
-		oled.setCursor(0, 7);
-		oled.print("              ");
+		oled.setFont(TimesNewRoman16);
+		oled.setCursor(0, 6);
+		oled.print("                                ");
+		//oled.print("88888888888888");
+		oled.setFont(Stang5x7);
 	}
 
 	/*
@@ -314,15 +323,23 @@ void pokazAktualnyCzas()
 
 void pokazArchiwalneCzasy()
 {
-	oled.setFont(Stang5x7);
-	oled.home();
+	oled.set2X();
+	oled.setFont(System5x7);
 
+	oled.home();
+/*
 	if ((working == LOW) && (finish == LOW)) oled.print( "GOTOWY ");  
 	if ((working == HIGH) && (finish == LOW)) oled.print("POMIAR "); 
 	if ((working == LOW) && (finish == HIGH)) oled.print("META   "); 
-
-	oled.setCursor(43, 0);
+*/
+	oled.setCursor(10, 0);
 	czasNaString(czas_aktualny);
+	oled.print(buf_akt_czas);
+	oled.setCursor(10, 2);
+	oled.print(buf_akt_czas);
+	oled.setCursor(10, 4);
+	oled.print(buf_akt_czas);
+	oled.setCursor(10, 6);
 	oled.print(buf_akt_czas);
 
 	int x = 25;
@@ -338,6 +355,7 @@ void pokazArchiwalneCzasy()
 		if ((y==2) && (working == LOW) && (finish == HIGH)) oled.print(" <--");
 		y++;
 	}
+	oled.set1X();
 }
 
 void pokazPaging()
