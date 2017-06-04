@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.5.11"
+#define version "1.5.16"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -30,8 +30,8 @@
 
 #define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
-#define logo_time 2000 // czas wyswietlania logo w ms
-#define czas_nieczulosci_ms 5*1000000 // czas przed upływem którego nie da się zresetować pomiaru
+#define logo_time 100 // czas wyswietlania logo w ms
+#define czas_nieczulosci_ms 1*1000000 // czas przed upływem którego nie da się zresetować pomiaru
 
 #define pin_sensor_gp8 3 // pin czujnika licznika okrążeń w gp8
 #define pin_gp8_mode 5 // przełącznik trybu GP8
@@ -274,10 +274,21 @@ void pokazLogo()
 void pokazAktualnyCzas()
 {
 	oled.home();
-	oled.setFont(lcdnums14x24); 
-	oled.setCursor(0, 2);
+	oled.setFont(lcdnums20x32); 
 	czasNaString(czas_aktualny);
-	oled.print(buf_akt_czas);
+
+	oled.setCursor(0, 2);
+	oled.print(bufmin);
+	oled.setFont(lcdnums4x32dwu); 
+	oled.print(":");
+	oled.setFont(lcdnums20x32); 
+	oled.print(bufsek); 
+	oled.setFont(lcdnums4x32kropka); 
+	oled.print(".");
+	oled.setCursor(90, 4);
+	oled.setFont(lcdnums12x16); 
+	oled.print(bufms);
+
 
 	oled.setFont(Stang5x7);
 	oled.setCursor(0, 0);
@@ -291,14 +302,20 @@ void pokazAktualnyCzas()
 
 		oled.setFont(Stang5x7);
 		oled.setCursor(0, 7);
-		oled.print("Okrazenie: ");
+		oled.print("Lap:");
+		oled.setFont(lcdnums12x16);
+		oled.setCursor(25, 6);
 		oled.print(okrazenie);
 		oled.print("/5");
+		oled.setFont(Stang5x7);
 	} else {
 		oled.setCursor(110, 0);
 		oled.print("   ");	
-		oled.setCursor(0, 7);
-		oled.print("              ");
+		oled.setFont(TimesNewRoman16);
+		oled.setCursor(0, 6);
+		oled.print("                                ");
+		//oled.print("88888888888888");
+		oled.setFont(Stang5x7);
 	}
 
 	/*
