@@ -1,0 +1,13 @@
+Added Component: Designator=BAT1(KK2)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Con1(PowerJack2.5_THT)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetBAT?_1 Pin=BAT1-1
+Added Pin To Net: NetName=GND Pin=BAT1-2
+Added Pin To Net: NetName=NetBAT?_1 Pin=Con1-1
+Added Pin To Net: NetName=GND Pin=Con1-2
+Added Pin To Net: NetName=GND Pin=Con1-3
+Change Net Name : Old Net Name=NetBAT?_1 New Net Name=NetBAT1_1
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component BAT1 YUASA-ACCU-HP0.8-12/Y
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con1 FCR681465P
+Added Room: Name=GymkhanaStoper v1.6 Main

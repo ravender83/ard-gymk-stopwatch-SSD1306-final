@@ -1,0 +1,182 @@
+Removed Pin From Net: NetName=NetU?_5 Pin=U?-5
+Removed Pin From Net: NetName=NetU?_5 Pin=U?-6
+Removed Pin From Net: NetName=NetU?_7 Pin=U?-7
+Removed Pin From Net: NetName=NetU?_7 Pin=U?-8
+Change Component Designator: OldDesignator=SW? NewDesignator=SW1
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Added Component: Designator=B1(Buzzer F/CM12P)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C1(8x10_SMD)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pojemnoœæ"; Value = "220uF"; VariantName = "[No Variations]"
+Added Component: Designator=C2(0805-C)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pojemnoœæ"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=C3(0805-C)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pojemnoœæ"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=C4(8x10_SMD)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pojemnoœæ"; Value = "10uF"; VariantName = "[No Variations]"
+Added Component: Designator=C5(0805-C)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pojemnoœæ"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=CON2(IDC10_2mm_SMT)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Con3(KK4)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Con4(KK2)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R1(0805-R)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rezystancja"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=R2(6.5x2.5x10)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rezystancja"; Value = "1k"; VariantName = "[No Variations]"
+Added Component: Designator=R3(0805-R)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rezystancja"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=R4(6.5x2.5x10)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rezystancja"; Value = "1k"; VariantName = "[No Variations]"
+Added Component: Designator=SW2(DPDT - SL13212c)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U2(Arduino nano)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U3(SOP4)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U4(SOP4)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U5(NRF24L01)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetU?_5 Pin=C1-2
+Added Pin To Net: NetName=NetU?_5 Pin=C2-1
+Added Pin To Net: NetName=NetU?_5 Pin=C3-1
+Added Pin To Net: NetName=NetU?_5 Pin=C4-2
+Added Pin To Net: NetName=NetU?_5 Pin=C5-1
+Added Pin To Net: NetName=NetU?_5 Pin=CON2-2
+Added Pin To Net: NetName=NetU?_5 Pin=CON2-4
+Added Pin To Net: NetName=NetSW?_1 Pin=Con3-1
+Added Pin To Net: NetName=GND Pin=Con3-3
+Added Pin To Net: NetName=NetU?_5 Pin=Con4-2
+Added Pin To Net: NetName=GND Pin=R2-1
+Added Pin To Net: NetName=GND Pin=R4-1
+Added Pin To Net: NetName=NetU?_5 Pin=SW2-3
+Added Pin To Net: NetName=NetU?_5 Pin=U1-7
+Added Pin To Net: NetName=NetU?_5 Pin=U1-8
+Added Pin To Net: NetName=NetU?_5 Pin=U2-3
+Added Pin To Net: NetName=NetU?_7 Pin=U2-14
+Added Pin To Net: NetName=NetU?_5 Pin=U2-28
+Added Pin To Net: NetName=NetU?_5 Pin=U3-3
+Added Pin To Net: NetName=NetU?_5 Pin=U4-3
+Added Pin To Net: NetName=NetU?_5 Pin=U5-1
+Added Pin To Net: NetName=NetU?_7 Pin=U5-7
+Change Net Name : Old Net Name=NetSW?_1 New Net Name=12V
+Change Net Name : Old Net Name=NetU?_5 New Net Name=sGND
+Change Net Name : Old Net Name=NetU?_7 New Net Name=NetU2_14
+Added Pin To Net: NetName=3.3V Pin=C3-2
+Added Pin To Net: NetName=3.3V Pin=C4-1
+Added Pin To Net: NetName=3.3V Pin=CON2-6
+Added Pin To Net: NetName=3.3V Pin=U2-16
+Added Pin To Net: NetName=3.3V Pin=U5-2
+Added Net: Name=3.3V
+Added Pin To Net: NetName=5V Pin=B1-1
+Added Pin To Net: NetName=5V Pin=C5-2
+Added Pin To Net: NetName=5V Pin=CON2-3
+Added Pin To Net: NetName=5V Pin=R1-2
+Added Pin To Net: NetName=5V Pin=R3-2
+Added Pin To Net: NetName=5V Pin=SW2-2
+Added Pin To Net: NetName=5V Pin=U2-26
+Added Net: Name=5V
+Added Pin To Net: NetName=7V Pin=C1-1
+Added Pin To Net: NetName=7V Pin=U1-5
+Added Pin To Net: NetName=7V Pin=U1-6
+Added Pin To Net: NetName=7V Pin=U2-29
+Added Net: Name=7V
+Added Pin To Net: NetName=NetB1_2 Pin=B1-2
+Added Pin To Net: NetName=NetB1_2 Pin=U2-8
+Added Net: Name=NetB1_2
+Added Pin To Net: NetName=NetC2_2 Pin=C2-2
+Added Pin To Net: NetName=NetC2_2 Pin=Con4-1
+Added Pin To Net: NetName=NetC2_2 Pin=U2-6
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetCON2_1 Pin=CON2-1
+Added Pin To Net: NetName=NetCON2_1 Pin=U2-23
+Added Net: Name=NetCON2_1
+Added Pin To Net: NetName=NetCON2_5 Pin=CON2-5
+Added Pin To Net: NetName=NetCON2_5 Pin=U2-7
+Added Net: Name=NetCON2_5
+Added Pin To Net: NetName=NetCON2_7 Pin=CON2-7
+Added Pin To Net: NetName=NetCON2_7 Pin=U2-10
+Added Net: Name=NetCON2_7
+Added Pin To Net: NetName=NetCON2_8 Pin=CON2-8
+Added Pin To Net: NetName=NetCON2_8 Pin=U2-20
+Added Net: Name=NetCON2_8
+Added Pin To Net: NetName=NetCON2_9 Pin=CON2-9
+Added Pin To Net: NetName=NetCON2_9 Pin=U2-22
+Added Net: Name=NetCON2_9
+Added Pin To Net: NetName=NetCON2_10 Pin=CON2-10
+Added Pin To Net: NetName=NetCON2_10 Pin=U2-21
+Added Net: Name=NetCON2_10
+Added Pin To Net: NetName=NetCon3_2 Pin=Con3-2
+Added Pin To Net: NetName=NetCon3_2 Pin=U3-1
+Added Net: Name=NetCon3_2
+Added Pin To Net: NetName=NetCon3_4 Pin=Con3-4
+Added Pin To Net: NetName=NetCon3_4 Pin=U4-1
+Added Net: Name=NetCon3_4
+Added Pin To Net: NetName=NetR1_1 Pin=R1-1
+Added Pin To Net: NetName=NetR1_1 Pin=U2-4
+Added Pin To Net: NetName=NetR1_1 Pin=U3-4
+Added Net: Name=NetR1_1
+Added Pin To Net: NetName=NetR2_2 Pin=R2-2
+Added Pin To Net: NetName=NetR2_2 Pin=U3-2
+Added Net: Name=NetR2_2
+Added Pin To Net: NetName=NetR3_1 Pin=R3-1
+Added Pin To Net: NetName=NetR3_1 Pin=U2-5
+Added Pin To Net: NetName=NetR3_1 Pin=U4-4
+Added Net: Name=NetR3_1
+Added Pin To Net: NetName=NetR4_2 Pin=R4-2
+Added Pin To Net: NetName=NetR4_2 Pin=U4-2
+Added Net: Name=NetR4_2
+Added Pin To Net: NetName=NetSW2_1 Pin=SW2-1
+Added Pin To Net: NetName=NetSW2_1 Pin=U2-9
+Added Net: Name=NetSW2_1
+Added Pin To Net: NetName=NetU2_11 Pin=U2-11
+Added Pin To Net: NetName=NetU2_11 Pin=U5-3
+Added Net: Name=NetU2_11
+Added Pin To Net: NetName=NetU2_12 Pin=U2-12
+Added Pin To Net: NetName=NetU2_12 Pin=U5-4
+Added Net: Name=NetU2_12
+Added Pin To Net: NetName=NetU2_13 Pin=U2-13
+Added Pin To Net: NetName=NetU2_13 Pin=U5-6
+Added Net: Name=NetU2_13
+Added Pin To Net: NetName=NetU2_15 Pin=U2-15
+Added Pin To Net: NetName=NetU2_15 Pin=U5-5
+Added Net: Name=NetU2_15
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component B1 F/CM12P
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component C1 C+
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component C2 kondensator
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component C3 kondensator
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component C4 C+
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component C5 kondensator
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component CON2 IDC10_2mm_SMD
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con3 NS39-W4P
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con4 Con2
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component R1 rezystor
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component R2 rezystor
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component R3 rezystor
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component R4 rezystor
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component SW2 SPDT ON-ON
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component U2 NANO
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component U3 PC817
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component U4 PC817
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component U5 NRF24L01

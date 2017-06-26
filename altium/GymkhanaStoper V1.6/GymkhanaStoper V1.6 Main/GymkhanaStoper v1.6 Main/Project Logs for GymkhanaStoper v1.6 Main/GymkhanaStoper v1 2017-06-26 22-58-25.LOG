@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=Con4 Old Footprint=KK2 New Footprint=KK2_2.54mm - 90deg
+Change Component Footprint: Designator=Con3 Old Footprint=KK4 New Footprint=KK4_2.54mm 90DEG
+Change Component Comment : Designator=CON2 Old Comment=IDC10_2mm New Comment=*

@@ -1,0 +1,14 @@
+Added Component: Designator=BTN1(TACT12x12)
+Add component. Clean all parameters for all variants
+Added Component: Designator=BTN2(TACT12x12)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetBTN1_1 Pin=BTN1-1
+Added Pin To Net: NetName=NetBTN1_1 Pin=BTN1-2
+Added Pin To Net: NetName=GND Pin=BTN1-3
+Added Pin To Net: NetName=GND Pin=BTN1-4
+Added Pin To Net: NetName=NetBTN2_1 Pin=BTN2-1
+Added Pin To Net: NetName=NetBTN2_1 Pin=BTN2-2
+Added Pin To Net: NetName=GND Pin=BTN2-3
+Added Pin To Net: NetName=GND Pin=BTN2-4
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Member=Component BTN1 RESET
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Member=Component BTN2 MENU

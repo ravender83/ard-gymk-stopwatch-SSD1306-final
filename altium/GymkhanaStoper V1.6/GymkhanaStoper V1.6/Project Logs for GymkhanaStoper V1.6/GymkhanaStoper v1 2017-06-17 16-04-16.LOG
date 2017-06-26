@@ -1,0 +1,5 @@
+Added Component: Designator=BAT?(KK2)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=GND Pin=BAT?-2
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component BAT? YUASA-ACCU-HP0.8-12/Y
+Added Room: Name=GymkhanaStoper v1.6 Main

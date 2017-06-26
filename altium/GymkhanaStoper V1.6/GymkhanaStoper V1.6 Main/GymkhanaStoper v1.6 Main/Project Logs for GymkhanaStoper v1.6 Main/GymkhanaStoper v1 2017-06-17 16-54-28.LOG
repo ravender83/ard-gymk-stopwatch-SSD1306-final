@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=NetBAT1_1 Pin=Con1-1
+Added Component: Designator=SW?(DPDT - SL13212c)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U?(MP1584EN)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetBAT1_1 Pin=SW?-3
+Added Pin To Net: NetName=GND Pin=U?-1
+Added Pin To Net: NetName=GND Pin=U?-2
+Added Pin To Net: NetName=NetCon1_1 Pin=Con1-1
+Added Pin To Net: NetName=NetCon1_1 Pin=SW?-2
+Added Net: Name=NetCon1_1
+Added Pin To Net: NetName=NetSW?_1 Pin=SW?-1
+Added Pin To Net: NetName=NetSW?_1 Pin=U?-3
+Added Pin To Net: NetName=NetSW?_1 Pin=U?-4
+Added Net: Name=NetSW?_1
+Added Pin To Net: NetName=NetU?_5 Pin=U?-5
+Added Pin To Net: NetName=NetU?_5 Pin=U?-6
+Added Net: Name=NetU?_5
+Added Pin To Net: NetName=NetU?_7 Pin=U?-7
+Added Pin To Net: NetName=NetU?_7 Pin=U?-8
+Added Net: Name=NetU?_7
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component SW? 5MS3S102AM6QE
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component U? MP1584EN

@@ -1,0 +1,23 @@
+100x 330R 0805
+100x 10k 0805
+100x 100nF
+3x DS1014-10MF1B
+3x FCR681465P
+3x 5MS3S102AM6QE
+3x 5MS1S102AM6QE
+5x NS39-W4K 
+5x B2P-VH 
+10x 1k7 0.5w MBB02070C1001FCT00
+
+
+wytrawiacz
+
+4x DS1018-02-10B2 idc
+3x DS1017-10MA2 
+ 5x dioda czerwona 5mm plaska L-483IDT
+5x zielona 5mm plaska L-483GDT
+krokowylki
+banany
+styki płaskie
+
+
