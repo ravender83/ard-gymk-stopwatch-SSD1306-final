@@ -1,0 +1,23 @@
+Change Component Footprint: Designator=R3 Old Footprint=0805-R New Footprint=6.5x2.5x10
+Change Component Footprint: Designator=U3 Old Footprint=SOP4 New Footprint=4SMD
+Change Component Footprint: Designator=U4 Old Footprint=SOP4 New Footprint=4SMD
+Change component parameters: Designator = "C4"; Footprint = "4x7x1.27"; UniqueID = "\NXSXKCSE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pojemnoœæ"; Value = "1uF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R1"; Footprint = "0805-R"; UniqueID = "\VEQCMGXL"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "10k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R2"; Footprint = "6.5x2.5x10"; UniqueID = "\NPFEMRST"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "1k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R3"; Footprint = "6.5x2.5x10"; UniqueID = "\ULQOOVGK"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "10k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R4"; Footprint = "6.5x2.5x10"; UniqueID = "\HOKOBKYD"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "1k"; VariantName = "[No Variations]"

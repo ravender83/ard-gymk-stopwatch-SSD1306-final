@@ -1,0 +1,19 @@
+Change Component Footprint: Designator=R2 Old Footprint=6.5x2.5x10 New Footprint=1206-R
+Change Component Footprint: Designator=R4 Old Footprint=6.5x2.5x10 New Footprint=1206-R
+Change Component Footprint: Designator=C2 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=C3 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=C5 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=R1 Old Footprint=0805-R New Footprint=1206-R
+Change Component Footprint: Designator=R3 Old Footprint=0805-R New Footprint=1206-R
+Added Component: Designator=Con3(KK4_2.54mm 90DEG)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Con4(KK2_4mm_JST)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=12V Pin=Con3-1
+Added Pin To Net: NetName=NetCon3_2 Pin=Con3-2
+Added Pin To Net: NetName=GND Pin=Con3-3
+Added Pin To Net: NetName=NetCon3_4 Pin=Con3-4
+Added Pin To Net: NetName=NetC2_2 Pin=Con4-1
+Added Pin To Net: NetName=sGND Pin=Con4-2
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con3 *
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con4 *

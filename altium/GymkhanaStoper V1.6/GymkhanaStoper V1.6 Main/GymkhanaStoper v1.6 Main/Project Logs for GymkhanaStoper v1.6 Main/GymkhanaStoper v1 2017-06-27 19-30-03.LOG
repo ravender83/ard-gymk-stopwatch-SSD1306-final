@@ -1,0 +1,7 @@
+Added Component: Designator=Con3(KK4_2.54mm)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=12V Pin=Con3-1
+Added Pin To Net: NetName=NetCon3_2 Pin=Con3-2
+Added Pin To Net: NetName=GND Pin=Con3-3
+Added Pin To Net: NetName=NetCon3_4 Pin=Con3-4
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Main Member=Component Con3 *

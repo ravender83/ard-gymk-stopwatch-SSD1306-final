@@ -1,0 +1,682 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2017-06-30</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">19:41:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:03</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc" class="file"><acronym title="D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc">D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">114</td></tr>
+</table>
+</td>
+</table><a name="ID03WKM11OCPYSJV50RGID5Y3BYO4R20RNZY2E31PECFQ3VRVMOSSL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWJWINALGCIL4MPI3Z3DLIEPOSIXF1ATRAZNEQRKQUD1EVVACECMJ">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZK2A255YWVLKKSIGLELTMFK42L4NMUA3T3KIRQKQUBTLNKGVAPVM">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHVLQGR1ML1ZYPBQ2KVYHX3WJHNK4XCMLX0BHFCOHRQ1XSOD3GO3J">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYALLXPEHWUTBH5EO45SBCG524ON3A0PUTYEMWCHEVMP5FSZ5ANTD">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDD5MWHNZ2XRERHBZ3MRQYUG0ADCQMOGSSQAQSI1LE1YVPTBMCZE5M">Width Constraint (Min=0.5mm) (Max=4mm) (Preferred=1.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2ST1P1TGMXGAPWK5N1AW354HYL3QL055GSUU2YMDWW1FH25FATVL">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWZRXPUAZNXOEPOE523MWKPBGGJJJJR31XOSJB0EUQOCEIUUCYHAN">Hole Size Constraint (Min=0.0254mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOXYLFO5KNOMABD0ERH4NPVVB0CA0EZKGBTYZZVNEYK1X0K4DPFOD">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDP3R5HI1W2JQSGK3XODWG0KHVYPURTXZCYFLESBNGZRVCCYWXS2">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">26</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGLHEGPVSESZAMFASBOG2NHWATKMHO4DS02QKVUKIVIKOTKXTK2TD">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">75</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDO145QT4BAVGQLHK4BTOO1D0F4LVLB1UEF0IID2PFUZT0ZVR1KSNN">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDETOLVDU0ZIZFLQSTSVPUZEDORNGQUFUDREFDKLB4B321YTKUSHE">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHPRLYRJU25MGLHGJZACACD2DO2INZO3HEXMBHJTJMUO5U353LSK">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">114</td>
+</tr>
+</table><br><a name="IDOXYLFO5KNOMABD0ERH4NPVVB0CA0EZKGBTYZZVNEYK1X0K4DPFOD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad CON2-5(29.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad CON2-5(29.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2161.521mil|Location2.X=2169.188mil|Location1.Y=1311.127mil|Location2.Y=1318.794mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad CON2-5(29.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2004.041mil|Location2.X=2011.707mil|Location1.Y=1232.387mil|Location2.Y=1240.054mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2004.041mil|Location2.X=2011.707mil|Location1.Y=1232.387mil|Location2.Y=1240.054mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad CON2-2(25.6mm,6mm) on Multi-Layer And Pad CON2-2(25.6mm,6mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDP3R5HI1W2JQSGK3XODWG0KHVYPURTXZCYFLESBNGZRVCCYWXS2"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-6(29.6mm,6mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-3(27.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-7(31.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-6(29.6mm,6mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-3(27.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-7(31.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-8(31.6mm,6mm) on Multi-Layer And Pad CON2-7(31.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-5(29.6mm,8mm) on Multi-Layer And Pad CON2-7(31.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2277.84mil|Location2.X=2289.09mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2277.84mil|Location2.X=2289.09mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-9(33.6mm,8mm) on Multi-Layer And Pad CON2-7(31.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2317.21mil|Location2.X=2328.46mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2317.21mil|Location2.X=2328.46mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-10(33.6mm,6mm) on Multi-Layer And Pad CON2-9(33.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-6(29.6mm,6mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-3(27.6mm,8mm) on Multi-Layer And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-4(27.6mm,6mm) on Multi-Layer And Pad CON2-3(27.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1309.336mil|Location2.Y=1320.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-1(25.6mm,8mm) on Multi-Layer And Pad CON2-3(27.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2002.249mil|Location2.X=2013.499mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2002.249mil|Location2.X=2013.499mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-2(25.6mm,6mm) on Multi-Layer And Pad CON2-1(25.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2002.249mil|Location2.X=2013.499mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2002.249mil|Location2.X=2013.499mil|Location1.Y=1269.966mil|Location2.Y=1281.216mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-2(25.6mm,6mm) on Multi-Layer And Pad CON2-1(25.6mm,8mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-4(27.6mm,6mm) on Multi-Layer And Pad CON2-2(25.6mm,6mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2041.619mil|Location2.X=2052.869mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-4(27.6mm,6mm) on Multi-Layer And Pad CON2-2(25.6mm,6mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.359mil|Location2.X=2131.609mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-6(29.6mm,6mm) on Multi-Layer And Pad CON2-4(27.6mm,6mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2199.099mil|Location2.X=2210.349mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-8(31.6mm,6mm) on Multi-Layer And Pad CON2-6(29.6mm,6mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2277.84mil|Location2.X=2289.09mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2277.84mil|Location2.X=2289.09mil|Location1.Y=1230.595mil|Location2.Y=1241.845mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1968mm &lt; 0.254mm) Between Pad CON2-10(33.6mm,6mm) on Multi-Layer And Pad CON2-8(31.6mm,6mm) on Multi-Layer [Top Solder] Mask Sliver [0.1968mm] / [Bottom Solder] Mask Sliver [0.1968mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.993mil|Location2.X=2541.413mil|Location1.Y=4143.536mil|Location2.Y=4154.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2529.993mil|Location2.X=2541.413mil|Location1.Y=4143.536mil|Location2.Y=4154.786mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.14736mm &lt; 0.254mm) Between Pad R1-2(38.343mm,79.2mm) on Top Layer And Pad B1-1(40.5mm,81mm) on Multi-Layer [Top Solder] Mask Sliver [0.14736mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2084.532mil|Location2.X=2095.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2084.532mil|Location2.X=2095.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1368mm &lt; 0.254mm) Between Pad Con3-1(26.42mm,91.5mm) on Multi-Layer And Pad Con3-2(28.96mm,91.5mm) on Multi-Layer [Top Solder] Mask Sliver [0.1368mm] / [Bottom Solder] Mask Sliver [0.1368mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2184.532mil|Location2.X=2195.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2184.532mil|Location2.X=2195.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1368mm &lt; 0.254mm) Between Pad Con3-3(31.5mm,91.5mm) on Multi-Layer And Pad Con3-2(28.96mm,91.5mm) on Multi-Layer [Top Solder] Mask Sliver [0.1368mm] / [Bottom Solder] Mask Sliver [0.1368mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.532mil|Location2.X=2295.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.532mil|Location2.X=2295.782mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1368mm &lt; 0.254mm) Between Pad Con3-4(34.04mm,91.5mm) on Multi-Layer And Pad Con3-3(31.5mm,91.5mm) on Multi-Layer [Top Solder] Mask Sliver [0.1368mm] / [Bottom Solder] Mask Sliver [0.1368mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1860.458mil|Location2.X=1871.708mil|Location1.Y=4280.792mil|Location2.Y=4292.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1860.458mil|Location2.X=1871.708mil|Location1.Y=4280.792mil|Location2.Y=4292.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2468mm &lt; 0.254mm) Between Pad U4-1(23.2mm,82.5mm) on Top Layer And Pad R4-2(22mm,85mm) on Multi-Layer [Top Solder] Mask Sliver [0.2468mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDGLHEGPVSESZAMFASBOG2NHWATKMHO4DS02QKVUKIVIKOTKXTK2TD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3329.646mil|Location2.X=3337.312mil|Location1.Y=2539.474mil|Location2.Y=2547.14mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3329.646mil|Location2.X=3337.312mil|Location1.Y=2539.474mil|Location2.Y=2547.14mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (57.335mm,39.2mm) on Bottom Overlay And Pad C4-2(58.47mm,39.2mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.237mil|Location2.X=3188.903mil|Location1.Y=2524.546mil|Location2.Y=2532.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.237mil|Location2.X=3188.903mil|Location1.Y=2524.546mil|Location2.Y=2532.213mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (57.335mm,39.2mm) on Bottom Overlay And Pad C4-1(56.2mm,39.2mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.814mil|Location2.X=3246.48mil|Location1.Y=2670.397mil|Location2.Y=2678.063mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3238.814mil|Location2.X=3246.48mil|Location1.Y=2670.397mil|Location2.Y=2678.063mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C4" (59.1964mm,42.095mm) on Bottom Overlay And Pad U5-1(56.5mm,42.96mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3223.923mil|Location2.X=3231.589mil|Location1.Y=2509.946mil|Location2.Y=2517.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3223.923mil|Location2.X=3231.589mil|Location1.Y=2509.946mil|Location2.Y=2517.613mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (56.585mm,37.95mm)(56.585mm,38.45mm) on Bottom Overlay And Pad C4-1(56.2mm,39.2mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.288mil|Location2.X=3223.538mil|Location1.Y=2504.749mil|Location2.Y=2515.999mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.288mil|Location2.X=3223.538mil|Location1.Y=2504.749mil|Location2.Y=2515.999mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.073mm &lt; 0.254mm) Between Track (56.335mm,38.2mm)(56.835mm,38.2mm) on Bottom Overlay And Pad C4-1(56.2mm,39.2mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.073mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2486.975mil|Location2.X=2498.225mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2486.975mil|Location2.X=2498.225mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.19007mm &lt; 0.254mm) Between Track (37.69mm,88.579mm)(37.69mm,94.421mm) on Bottom Overlay And Pad Con4-1(38.96mm,91.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.19007mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2669.492mil|Location2.X=2680.742mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2669.492mil|Location2.X=2680.742mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.19007mm &lt; 0.254mm) Between Track (42.77mm,88.579mm)(42.77mm,94.421mm) on Bottom Overlay And Pad Con4-2(41.5mm,91.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.19007mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3242.23mil|Location2.Y=3249.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3242.23mil|Location2.Y=3249.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,57.05mm)(0.78mm,69.75mm) on Bottom Overlay And Pad SW1-0(1.75mm,56.8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3242.23mil|Location2.Y=3249.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3242.23mil|Location2.Y=3249.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,57.05mm)(8.78mm,57.05mm) on Bottom Overlay And Pad SW1-0(1.75mm,56.8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3742.23mil|Location2.Y=3749.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3742.23mil|Location2.Y=3749.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,57.05mm)(0.78mm,69.75mm) on Bottom Overlay And Pad SW1-0(1.75mm,70mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3742.23mil|Location2.Y=3749.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=3742.23mil|Location2.Y=3749.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,69.75mm)(8.78mm,69.75mm) on Bottom Overlay And Pad SW1-0(1.75mm,70mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1401.678mil|Location2.Y=1409.345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1401.678mil|Location2.Y=1409.345mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,10.3mm)(0.78mm,23mm) on Bottom Overlay And Pad SW2-0(1.75mm,10.05mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1401.678mil|Location2.Y=1409.345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1401.678mil|Location2.Y=1409.345mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,10.3mm)(8.78mm,10.3mm) on Bottom Overlay And Pad SW2-0(1.75mm,10.05mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1376.704mil|Location2.X=1387.954mil|Location1.Y=1834.926mil|Location2.Y=1846.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1376.704mil|Location2.X=1387.954mil|Location1.Y=1834.926mil|Location2.Y=1846.176mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.13631mm &lt; 0.254mm) Between Track (9.516mm,20.765mm)(9.516mm,22.035mm) on Top Overlay And Pad SW2-3(11.28mm,21.35mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.13631mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1378.052mil|Location2.X=1389.302mil|Location1.Y=1812.286mil|Location2.Y=1826.261mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1378.052mil|Location2.X=1389.302mil|Location1.Y=1812.286mil|Location2.Y=1826.261mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.23134mm &lt; 0.254mm) Between Track (7.484mm,20.765mm)(9.516mm,20.765mm) on Top Overlay And Pad SW2-3(11.28mm,21.35mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.23134mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1901.678mil|Location2.Y=1909.345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1901.678mil|Location2.Y=1909.345mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,10.3mm)(0.78mm,23mm) on Bottom Overlay And Pad SW2-0(1.75mm,23.25mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1901.678mil|Location2.Y=1909.345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.875mil|Location2.X=1034.542mil|Location1.Y=1901.678mil|Location2.Y=1909.345mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (0.78mm,23mm)(8.78mm,23mm) on Bottom Overlay And Pad SW2-0(1.75mm,23.25mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1428.208mil|Location2.X=1435.875mil|Location1.Y=2132.935mil|Location2.Y=2140.601mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1428.208mil|Location2.X=1435.875mil|Location1.Y=2132.935mil|Location2.Y=2140.601mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "BAT1" (10.839mm,27.456mm) on Bottom Overlay And Pad BAT1-1(10.61mm,30.25mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(31.6mm,9mm) on Bottom Overlay And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(31.6mm,9mm) on Bottom Overlay And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(31.6mm,9mm) on Bottom Overlay And Pad CON2-7(31.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2238.47mil|Location2.X=2249.72mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (31.6mm,9mm)(31.6mm,9.7mm) on Bottom Overlay And Pad CON2-7(31.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2159.729mil|Location2.X=2170.979mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(31.6mm,9mm) on Bottom Overlay And Pad CON2-5(29.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(27.6mm,9.7mm) on Bottom Overlay And Pad CON2-3(27.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2080.989mil|Location2.X=2092.239mil|Location1.Y=1342.276mil|Location2.Y=1353.526mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07264mm &lt; 0.254mm) Between Track (27.6mm,9mm)(31.6mm,9mm) on Bottom Overlay And Pad CON2-3(27.6mm,8mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.07264mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.075mil|Location2.X=2570.742mil|Location1.Y=4177.265mil|Location2.Y=4184.931mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.075mil|Location2.X=2570.742mil|Location1.Y=4177.265mil|Location2.Y=4184.931mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R3" (41.243mm,80mm) on Top Overlay And Pad B1-1(40.5mm,81mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1452.001mil|Location2.X=1459.668mil|Location1.Y=4185.143mil|Location2.Y=4192.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1452.001mil|Location2.X=1459.668mil|Location1.Y=4185.143mil|Location2.Y=4192.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (4mm,81mm)(15mm,81mm) on Bottom Overlay And Pad Con1-2(11.1mm,82mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1586.718mil|Location2.X=1594.384mil|Location1.Y=3976.39mil|Location2.Y=3984.057mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1586.718mil|Location2.X=1594.384mil|Location1.Y=3976.39mil|Location2.Y=3984.057mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (15mm,73mm)(15mm,81mm) on Bottom Overlay And Pad Con1-1(14.2mm,77mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1990.369mil|Location2.X=2001.619mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1990.369mil|Location2.X=2001.619mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.0425mm &lt; 0.254mm) Between Track (25.15mm,88.579mm)(25.15mm,94.421mm) on Bottom Overlay And Pad Con3-1(26.42mm,91.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.0425mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.824mil|Location2.X=2013.491mil|Location1.Y=4568.693mil|Location2.Y=4576.359mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.824mil|Location2.X=2013.491mil|Location1.Y=4568.693mil|Location2.Y=4576.359mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R2" (25mm,91.25mm) on Top Overlay And Pad Con3-1(26.42mm,91.5mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2378.696mil|Location2.X=2389.946mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2378.696mil|Location2.X=2389.946mil|Location1.Y=4596.737mil|Location2.Y=4607.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.0425mm &lt; 0.254mm) Between Track (35.31mm,88.579mm)(35.31mm,94.421mm) on Bottom Overlay And Pad Con3-4(34.04mm,91.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.0425mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1478.68mil|Location2.X=1486.347mil|Location1.Y=4524.586mil|Location2.Y=4532.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1478.68mil|Location2.X=1486.347mil|Location1.Y=4524.586mil|Location2.Y=4532.253mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "Con1" (14.5mm,88.5mm) on Bottom Overlay And Pad R2-1(13.5mm,90mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1574.513mil|Location2.X=1582.18mil|Location1.Y=4539.474mil|Location2.Y=4547.14mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1574.513mil|Location2.X=1582.18mil|Location1.Y=4539.474mil|Location2.Y=4547.14mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (14.69mm,90mm)(15mm,90mm) on Top Overlay And Pad R2-1(13.5mm,90mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.501mil|Location2.X=1589.751mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1578.501mil|Location2.X=1589.751mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07241mm &lt; 0.254mm) Between Track (15mm,88.5mm)(15mm,91.5mm) on Top Overlay And Pad R2-1(13.5mm,90mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.07241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1975.154mil|Location2.X=1986.404mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1975.154mil|Location2.X=1986.404mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2224mm &lt; 0.254mm) Between Track (25.15mm,88.579mm)(25.15mm,94.421mm) on Bottom Overlay And Pad R2-2(23.5mm,90mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.2224mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1874.513mil|Location2.X=1882.18mil|Location1.Y=4539.474mil|Location2.Y=4547.14mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1874.513mil|Location2.X=1882.18mil|Location1.Y=4539.474mil|Location2.Y=4547.14mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (22mm,90mm)(22.31mm,90mm) on Top Overlay And Pad R2-2(23.5mm,90mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1866.942mil|Location2.X=1878.192mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1866.942mil|Location2.X=1878.192mil|Location1.Y=4537.682mil|Location2.Y=4548.932mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07241mm &lt; 0.254mm) Between Track (22mm,88.5mm)(22mm,91.5mm) on Top Overlay And Pad R2-2(23.5mm,90mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.07241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1971.614mil|Location2.X=1982.864mil|Location1.Y=4546.664mil|Location2.Y=4557.914mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1971.614mil|Location2.X=1982.864mil|Location1.Y=4546.664mil|Location2.Y=4557.914mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.08228mm &lt; 0.254mm) Between Text "R2" (25mm,91.25mm) on Top Overlay And Pad R2-2(23.5mm,90mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.08228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.446mil|Location2.X=1530.696mil|Location1.Y=4340.832mil|Location2.Y=4352.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.446mil|Location2.X=1530.696mil|Location1.Y=4340.832mil|Location2.Y=4352.082mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07241mm &lt; 0.254mm) Between Track (13.5mm,83.5mm)(13.5mm,86.5mm) on Top Overlay And Pad R4-1(12mm,85mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.07241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1515.458mil|Location2.X=1523.125mil|Location1.Y=4342.623mil|Location2.Y=4350.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1515.458mil|Location2.X=1523.125mil|Location1.Y=4342.623mil|Location2.Y=4350.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (13.19mm,85mm)(13.5mm,85mm) on Top Overlay And Pad R4-1(12mm,85mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1414.774mil|Location2.X=1426.024mil|Location1.Y=4331.85mil|Location2.Y=4343.1mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1414.774mil|Location2.X=1426.024mil|Location1.Y=4331.85mil|Location2.Y=4343.1mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.08228mm &lt; 0.254mm) Between Text "R4" (10.5mm,83.75mm) on Top Overlay And Pad R4-1(12mm,85mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.08228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1815.458mil|Location2.X=1823.125mil|Location1.Y=4342.623mil|Location2.Y=4350.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1815.458mil|Location2.X=1823.125mil|Location1.Y=4342.623mil|Location2.Y=4350.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (20.5mm,85mm)(20.81mm,85mm) on Top Overlay And Pad R4-2(22mm,85mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1807.887mil|Location2.X=1819.137mil|Location1.Y=4340.832mil|Location2.Y=4352.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1807.887mil|Location2.X=1819.137mil|Location1.Y=4340.832mil|Location2.Y=4352.082mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.07241mm &lt; 0.254mm) Between Track (20.5mm,83.5mm)(20.5mm,86.5mm) on Top Overlay And Pad R4-2(22mm,85mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.07241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (7.484mm,20.765mm)(7.484mm,22.035mm) on Top Overlay And Pad C5-2(7.357mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (7.484mm,20.765mm)(9.516mm,20.765mm) on Top Overlay And Pad C5-2(7.357mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1863.686mil|Location2.Y=1871.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1290.812mil|Location2.X=1298.479mil|Location1.Y=1863.686mil|Location2.Y=1871.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (7.484mm,22.035mm)(9.516mm,22.035mm) on Top Overlay And Pad C5-2(7.357mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (9.516mm,20.765mm)(9.516mm,22.035mm) on Top Overlay And Pad C5-1(9.643mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1813.686mil|Location2.Y=1821.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (7.484mm,20.765mm)(9.516mm,20.765mm) on Top Overlay And Pad C5-1(9.643mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1863.686mil|Location2.Y=1871.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1370.812mil|Location2.X=1378.479mil|Location1.Y=1863.686mil|Location2.Y=1871.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (7.484mm,22.035mm)(9.516mm,22.035mm) on Top Overlay And Pad C5-1(9.643mm,21.4mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3245.576mil|Location2.X=3253.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3245.576mil|Location2.X=3253.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (57.135mm,48.341mm)(57.135mm,50.373mm) on Top Overlay And Pad C3-2(56.5mm,48.214mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (55.865mm,48.341mm)(55.865mm,50.373mm) on Top Overlay And Pad C3-2(56.5mm,48.214mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2899.356mil|Location2.Y=2907.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (55.865mm,48.341mm)(57.135mm,48.341mm) on Top Overlay And Pad C3-2(56.5mm,48.214mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3245.576mil|Location2.X=3253.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3245.576mil|Location2.X=3253.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (57.135mm,48.341mm)(57.135mm,50.373mm) on Top Overlay And Pad C3-1(56.5mm,50.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (55.865mm,48.341mm)(55.865mm,50.373mm) on Top Overlay And Pad C3-1(56.5mm,50.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3195.576mil|Location2.X=3203.243mil|Location1.Y=2979.356mil|Location2.Y=2987.022mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (55.865mm,50.373mm)(57.135mm,50.373mm) on Top Overlay And Pad C3-1(56.5mm,50.5mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (39.627mm,88.365mm)(39.627mm,89.635mm) on Top Overlay And Pad C2-2(39.5mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4525.104mil|Location2.Y=4532.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4525.104mil|Location2.Y=4532.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (39.627mm,89.635mm)(41.659mm,89.635mm) on Top Overlay And Pad C2-2(39.5mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2556.285mil|Location2.X=2563.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (39.627mm,88.365mm)(41.659mm,88.365mm) on Top Overlay And Pad C2-2(39.5mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (41.659mm,88.365mm)(41.659mm,89.635mm) on Top Overlay And Pad C2-1(41.786mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4525.104mil|Location2.Y=4532.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4525.104mil|Location2.Y=4532.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (39.627mm,89.635mm)(41.659mm,89.635mm) on Top Overlay And Pad C2-1(41.786mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.285mil|Location2.X=2643.951mil|Location1.Y=4475.104mil|Location2.Y=4482.77mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (39.627mm,88.365mm)(41.659mm,88.365mm) on Top Overlay And Pad C2-1(41.786mm,89mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (38.216mm,78.565mm)(38.216mm,79.835mm) on Top Overlay And Pad R1-2(38.343mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.184mm,78.565mm)(38.216mm,78.565mm) on Top Overlay And Pad R1-2(38.343mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4139.277mil|Location2.Y=4146.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2500.734mil|Location2.X=2508.4mil|Location1.Y=4139.277mil|Location2.Y=4146.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.184mm,79.835mm)(38.216mm,79.835mm) on Top Overlay And Pad R1-2(38.343mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.184mm,78.565mm)(36.184mm,79.835mm) on Top Overlay And Pad R1-1(36.057mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4089.277mil|Location2.Y=4096.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.184mm,78.565mm)(38.216mm,78.565mm) on Top Overlay And Pad R1-1(36.057mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4139.277mil|Location2.Y=4146.944mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.734mil|Location2.X=2428.4mil|Location1.Y=4139.277mil|Location2.Y=4146.944mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.184mm,79.835mm)(38.216mm,79.835mm) on Top Overlay And Pad R1-1(36.057mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2389.778mil|Location2.X=2401.028mil|Location1.Y=4113.102mil|Location2.Y=4124.352mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2389.778mil|Location2.X=2401.028mil|Location1.Y=4113.102mil|Location2.Y=4124.352mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.21153mm &lt; 0.254mm) Between Text "R1" (35.2mm,78.2mm) on Top Overlay And Pad R1-1(36.057mm,79.2mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.21153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (38.259mm,80.365mm)(38.259mm,81.635mm) on Top Overlay And Pad R3-2(38.386mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4210.143mil|Location2.Y=4217.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4210.143mil|Location2.Y=4217.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.227mm,81.635mm)(38.259mm,81.635mm) on Top Overlay And Pad R3-2(38.386mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2502.427mil|Location2.X=2510.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.227mm,80.365mm)(38.259mm,80.365mm) on Top Overlay And Pad R3-2(38.386mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.227mm,80.365mm)(36.227mm,81.635mm) on Top Overlay And Pad R3-1(36.1mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4210.143mil|Location2.Y=4217.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4210.143mil|Location2.Y=4217.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.227mm,81.635mm)(38.259mm,81.635mm) on Top Overlay And Pad R3-1(36.1mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2422.427mil|Location2.X=2430.093mil|Location1.Y=4160.143mil|Location2.Y=4167.81mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Track (36.227mm,80.365mm)(38.259mm,80.365mm) on Top Overlay And Pad R3-1(36.1mm,81mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2332.01mil|Location2.X=2339.676mil|Location1.Y=4129.475mil|Location2.Y=4137.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2332.01mil|Location2.X=2339.676mil|Location1.Y=4129.475mil|Location2.Y=4137.142mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1" (35.2mm,78.2mm) on Top Overlay And Pad U4-3(33mm,79.96mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDO145QT4BAVGQLHK4BTOO1D0F4LVLB1UEF0IID2PFUZT0ZVR1KSNN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3298.66mil|Location2.X=3306.326mil|Location1.Y=2713.431mil|Location2.Y=2721.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3298.66mil|Location2.X=3306.326mil|Location1.Y=2713.431mil|Location2.Y=2721.097mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C4" (59.1964mm,42.095mm) on Bottom Overlay And Track (58.532mm,41.69mm)(58.532mm,72.17mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.952mil|Location2.X=3306.202mil|Location1.Y=2643.686mil|Location2.Y=2654.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.952mil|Location2.X=3306.202mil|Location1.Y=2643.686mil|Location2.Y=2654.936mil|Absolute=True">Silk To Silk Clearance Constraint: (0.151mm &lt; 0.254mm) Between Text "C4" (59.1964mm,42.095mm) on Bottom Overlay And Track (43.292mm,41.69mm)(58.532mm,41.69mm) on Bottom Overlay Silk Text to Silk Clearance [0.151mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1396.061mil|Location2.X=1403.727mil|Location1.Y=2024.474mil|Location2.Y=2032.14mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1396.061mil|Location2.X=1403.727mil|Location1.Y=2024.474mil|Location2.Y=2032.14mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SW2" (12.6258mm,25.6132mm) on Bottom Overlay And Track (10.228mm,26.119mm)(10.228mm,26.881mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.278mil|Location2.X=1400.944mil|Location1.Y=2054.474mil|Location2.Y=2062.14mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.278mil|Location2.X=1400.944mil|Location1.Y=2054.474mil|Location2.Y=2062.14mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SW2" (12.6258mm,25.6132mm) on Bottom Overlay And Track (7.18mm,26.881mm)(10.228mm,26.881mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.936mil|Location2.X=1495.603mil|Location1.Y=2064.541mil|Location2.Y=2072.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.936mil|Location2.X=1495.603mil|Location1.Y=2064.541mil|Location2.Y=2072.208mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SW2" (12.6258mm,25.6132mm) on Bottom Overlay And Track (12.61mm,26mm)(12.61mm,34.5mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.752mil|Location2.X=1495.418mil|Location1.Y=2077.112mil|Location2.Y=2084.778mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.752mil|Location2.X=1495.418mil|Location1.Y=2077.112mil|Location2.Y=2084.778mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "BAT1" (10.839mm,27.456mm) on Bottom Overlay And Track (12.61mm,26mm)(12.61mm,34.5mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1453.258mil|Location2.X=1460.925mil|Location1.Y=2022.171mil|Location2.Y=2029.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1453.258mil|Location2.X=1460.925mil|Location1.Y=2022.171mil|Location2.Y=2029.838mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SW2" (12.6258mm,25.6132mm) on Bottom Overlay And Track (4.75mm,26mm)(12.61mm,26mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.052mil|Location2.X=1490.718mil|Location1.Y=3872.532mil|Location2.Y=3880.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1483.052mil|Location2.X=1490.718mil|Location1.Y=3872.532mil|Location2.Y=3880.198mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SW1" (12.6208mm,72.3576mm) on Bottom Overlay And Track (4mm,73mm)(15mm,73mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1461.463mil|Location2.X=1472.713mil|Location1.Y=2069.035mil|Location2.Y=2080.285mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\GitHub\ard-gymk-stopwatch-SSD1306-final\altium\GymkhanaStoper v1.6 Main.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1461.463mil|Location2.X=1472.713mil|Location1.Y=2069.035mil|Location2.Y=2080.285mil|Absolute=True">Silk To Silk Clearance Constraint: (0.06529mm &lt; 0.254mm) Between Text "SW2" (12.6258mm,25.6132mm) on Bottom Overlay And Text "BAT1" (10.839mm,27.456mm) on Bottom Overlay Silk Text to Silk Clearance [0.06529mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

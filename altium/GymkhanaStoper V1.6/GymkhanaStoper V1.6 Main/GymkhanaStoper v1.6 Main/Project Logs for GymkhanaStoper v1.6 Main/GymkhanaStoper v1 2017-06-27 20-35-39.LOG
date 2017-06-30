@@ -1,0 +1,19 @@
+Change Component Footprint: Designator=R2 Old Footprint=6.5x2.5x10 New Footprint=1206-R
+Change Component Footprint: Designator=R4 Old Footprint=6.5x2.5x10 New Footprint=1206-R
+Change Component Footprint: Designator=C4 Old Footprint=8x10_SMD New Footprint=4x7x1.27
+Change Component Footprint: Designator=C1 Old Footprint=8x10_SMD New Footprint=10x12.5x4.4
+Change Component Footprint: Designator=C2 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=C3 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=C5 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=R1 Old Footprint=0805-R New Footprint=1206-R
+Change Component Footprint: Designator=R3 Old Footprint=0805-R New Footprint=1206-R
+Change Component Footprint: Designator=Con4 Old Footprint=KK2_2.54mm New Footprint=KK2_4mm_JST
+Change Component Footprint: Designator=Con3 Old Footprint=KK4_2.54mm New Footprint=KK4_2.54mm 90DEG
+Change component parameters: Designator = "C1"; Footprint = "10x12.5x4.4"; UniqueID = "\ALJBTAME"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pojemnoœæ"; Value = "220uF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C4"; Footprint = "4x7x1.27"; UniqueID = "\NXSXKCSE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Napiêcie"; Value = "100V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pojemnoœæ"; Value = "4.7uF"; VariantName = "[No Variations]"
