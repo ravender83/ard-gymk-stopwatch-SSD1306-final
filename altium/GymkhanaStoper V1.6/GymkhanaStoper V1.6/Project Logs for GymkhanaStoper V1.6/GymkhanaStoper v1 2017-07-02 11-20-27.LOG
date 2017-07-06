@@ -1,0 +1,13 @@
+Added Component: Designator=CON1(IDC10_2.54mm_SMT)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetBTN1_1 Pin=CON1-1
+Added Pin To Net: NetName=GND Pin=CON1-2
+Added Pin To Net: NetName=5V Pin=CON1-3
+Added Pin To Net: NetName=GND Pin=CON1-4
+Added Pin To Net: NetName=NetCON1_5 Pin=CON1-5
+Added Pin To Net: NetName=NetCON1_6 Pin=CON1-6
+Added Pin To Net: NetName=NetCON1_7 Pin=CON1-7
+Added Pin To Net: NetName=NetCON1_8 Pin=CON1-8
+Added Pin To Net: NetName=NetBTN2_1 Pin=CON1-9
+Added Pin To Net: NetName=NetCON1_10 Pin=CON1-10
+Added Member To Class: ClassName=GymkhanaStoper v1.6 Member=Component CON1 IDC10_2.54mm

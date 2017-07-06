@@ -1,0 +1,19 @@
+Change Component Footprint: Designator=C1 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=C2 Old Footprint=0805-C New Footprint=0603-C
+Change Component Footprint: Designator=R1 Old Footprint=0805-R New Footprint=1206-R
+Change Component Footprint: Designator=R2 Old Footprint=0805-R New Footprint=1206-R
+Change Component Footprint: Designator=DISP1 Old Footprint=SD1306-128x64 New Footprint=SD1306-128x64 nohole
+Change Component Comment : Designator=CON1 Old Comment=IDC10_2.54mm New Comment=*
+Change Component Comment : Designator=LED1 Old Comment=Led5mm_green New Comment=*
+Change Component Comment : Designator=LED2 Old Comment=Led5mm_red New Comment=*
+Change Component Comment : Designator=BTN2 Old Comment=MENU New Comment=*
+Change Component Comment : Designator=BTN1 Old Comment=RESET New Comment=*
+Change Component Comment : Designator=DISP1 Old Comment=SD1306_128x64 New Comment=*
+Change component parameters: Designator = "R1"; Footprint = "1206-R"; UniqueID = "\RQSPPCYD"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "100R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R2"; Footprint = "1206-R"; UniqueID = "\INRCCVVG"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Moc"; Value = "1/2 W"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rezystancja"; Value = "100R"; VariantName = "[No Variations]"
