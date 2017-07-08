@@ -4,7 +4,7 @@
  * Web:      https://github.com/ravender83
  * Date:     2017/05/25
 */
-#define version "1.5.17"
+#define version "1.6.01"
 
 #include "SSD1306Ascii.h"
 #include "SSD1306AsciiAvrI2c.h"
@@ -17,18 +17,18 @@
 
 #define I2C_ADDRESS 0x3C // adres I2C 
 
-#define pin_sensor 2		// wejście czujnika laserowego
+#define pin_sensor 2	// wejście czujnika laserowego
 #define pin_ex_reset 4		// wejście przycisku reset nożnego
-#define pin_reset A1		// wejście przycisku reset na urządzeniu
-#define pin_menu  A0		// wejście przycisku menu na urządzeniu
+#define pin_reset A2		// wejście przycisku reset na urządzeniu
+#define pin_menu  A3		// wejście przycisku menu na urządzeniu
 #define int_max_times_nr 6
 
-#define pout_ready_led A2	// dioda led sygnalizująca o gotowości do pomiaru
-#define pout_running_led A3	// dioda led sygnalizująca o trwaniu pomiaru
+#define pout_ready_led A6	// dioda led sygnalizująca o gotowości do pomiaru
+#define pout_running_led A7	// dioda led sygnalizująca o trwaniu pomiaru
 #define pout_buzzer	7		// buzzer informujący o przecięciu wiązki
 #define czas_piszczenia_ms 1000 	// czas piszczenia w [ms]
 
-#define debounce_time_ms 100
+#define debounce_time_ms 10
 #define max_ekran 2 // liczba dostepnych ekranow
 #define logo_time 3000 // czas wyswietlania logo w ms
 #define czas_nieczulosci_ms 1*5000000 // czas przed upływem którego nie da się zresetować pomiaru
